@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro';
-import { View, Image } from '@tarojs/components';
+import { View } from '@tarojs/components';
 import { connect } from '@tarojs/redux';
-import { AtToast, AtCard } from "taro-ui"
+import { AtToast } from "taro-ui";
+import MovieItem from '../../components/movie';
 import './index.scss';
 
 @connect(({list}) => ({
@@ -57,18 +58,7 @@ export default class List extends Component {
         {
           list.length > 0 ? (
             list.map((item) => (
-              // <View className="content" key={item.id}>
-                
-              // </View>
-              <AtCard
-                className='AtCard'
-                key={item.id}
-                note={item.genres}
-                extra={`评分：${item.rating.average || '暂无评分'}`}
-                title={item.title}
-              >
-                <Image  src={item.images.small} className='movie-pic' />
-              </AtCard>
+              <MovieItem item={item} key={item.id} />
             ))
           ) : null
         }
