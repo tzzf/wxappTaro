@@ -28,6 +28,14 @@ class App extends Component {
       'pages/list/index',
       'pages/weather/index'
     ],
+    subPackages: [
+      {
+        root: 'moduleMovie',
+        pages: [
+          'detail/index',
+        ]
+      }
+    ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',

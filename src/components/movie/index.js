@@ -10,20 +10,27 @@ class Movie extends Component {
             images: {}
         },
     };
-  render() {
-    const { item } = this.props;
-    return (
-        <AtCard
-          className='AtCard'
-          key={item.id}
-          note={item.genres}
-          extra={`评分：${item.rating.average || '暂无评分'}`}
-          title={item.title}
-        >
-            <Image  src={item.images.small} className='movie-pic' />
-        </AtCard>
-    );
-  }
+    goPath = () => {
+        const { item } = this.state;
+        Taro.navigateTo({
+            url: `/moduleMovie/detail/index?id=${item.id}`
+        })
+    }
+    render() {
+        const { item } = this.props;
+        return (
+            <AtCard
+              className='AtCard'
+              key={item.id}
+              note={item.genres}
+              extra={`评分：${item.rating.average || '暂无评分'}`}
+              title={item.title}
+              onClick={this.goPath}
+            >
+                <Image src={item.images.small} className='movie-pic' />
+            </AtCard>
+        );
+    }
 }
 
 export default Movie;
