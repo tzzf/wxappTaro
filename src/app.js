@@ -24,9 +24,9 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/movie/index',
+      'pages/hot/index',
       'pages/list/index',
-      'pages/weather/index'
+      'pages/now/index'
     ],
     subPackages: [
       {
@@ -44,8 +44,8 @@ class App extends Component {
     },
     tabBar: {
       list: [{
-        pagePath: "pages/movie/index",
-        text: "电影",
+        pagePath: "pages/hot/index",
+        text: "热映中",
         iconPath: "./images/tab/movie.png",
         selectedIconPath: "./images/tab/movie-active.png"
       },{
@@ -54,8 +54,8 @@ class App extends Component {
         iconPath: "./images/tab/list.png",
         selectedIconPath: "./images/tab/list-active.png"
       }, {
-        pagePath: "pages/weather/index",
-        text: "天气",
+        pagePath: "pages/now/index",
+        text: "最新",
         iconPath: "./images/tab/weather.png",
         selectedIconPath: "./images/tab/weather-active.png"
       }],

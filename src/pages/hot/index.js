@@ -5,12 +5,12 @@ import { AtToast } from "taro-ui";
 import MovieItem from '../../components/movie';
 import './index.scss';
 
-@connect(({now}) => ({
-  now,
+@connect(({hot}) => ({
+  hot,
 }))
 export default class Movie extends Component {
   config = {
-    navigationBarTitleText: '电影',
+    navigationBarTitleText: '热映中',
   };
   state = {
     isLoading: false,
@@ -21,7 +21,7 @@ export default class Movie extends Component {
     })
     const { dispatch } = this.props;
     dispatch({
-      type: 'now/getNow',
+      type: 'hot/getHot',
       payload: {},
       hideLoading: () => {
         this.setState({
@@ -32,7 +32,7 @@ export default class Movie extends Component {
   };
 
   render() {
-    const { now: { list } } = this.props;
+    const { hot: { list } } = this.props;
     const { isLoading } = this.state;
     return (
       <View className='about-page'>

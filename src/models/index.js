@@ -1,6 +1,7 @@
 import common from './common';
 import list from './list';
 import now from './now';
+import hot from './hot';
 import detail from './detail';
 
 export default [
@@ -8,4 +9,5 @@ export default [
   list,
   now,
   detail,
+  hot,
 ]
