@@ -4,21 +4,16 @@ import { AtToast } from "taro-ui";
 import { connect } from '@tarojs/redux';
 import './index.scss';
 
-@connect(({detail}) => ({
+@connect(({detail, loading}) => ({
   detail,
+  loading: loading.models.detail
 }))
-export default class Weather extends Component {
+class Detail extends Component {
   config = {
     navigationBarTitleText: '详情',
   };
-  state = {
-    isLoading: false,
-  }
 
   componentDidMount = () => {
-    this.setState({
-      isLoading: true,
-    })
     const { id } = this.$router.params;
     const { dispatch } = this.props;
     dispatch({
@@ -31,9 +26,6 @@ export default class Weather extends Component {
         wx.setNavigationBarTitle({
           title: detail.title
         });
-        this.setState({
-          isLoading: false,
-        })
       }
     })
   };
@@ -45,12 +37,11 @@ export default class Weather extends Component {
   }
 
   render() {
-    const { detail: { detail } } = this.props;
-    const { isLoading } = this.state;
+    const { detail: { detail }, loading } = this.props;
     return (
       <View className='about-page'>
         {
-          isLoading ? null : (
+          !loading ? null : (
             <View>
               <Image src={detail.images.medium} className='movie-pic' />
               <View>
@@ -60,7 +51,7 @@ export default class Weather extends Component {
           )
         }
         <AtToast
-          isOpened={isLoading}
+          isOpened={!!loading}
           status='loading'
           text='正在加载'
           hasMask
@@ -70,3 +61,4 @@ export default class Weather extends Component {
     )
   }
 }
+export default Detail

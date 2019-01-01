@@ -5,35 +5,24 @@ import { AtToast } from "taro-ui";
 import MovieItem from '../../components/movie';
 import './index.scss';
 
-@connect(({hot}) => ({
+@connect(({hot, loading}) => ({
   hot,
+  loading: loading.models.hot
 }))
-export default class Movie extends Component {
+class HotMovie extends Component {
   config = {
     navigationBarTitleText: '热映中',
   };
-  state = {
-    isLoading: false,
-  }
   componentDidMount = () => {
-    this.setState({
-      isLoading: true,
-    })
     const { dispatch } = this.props;
     dispatch({
       type: 'hot/getHot',
       payload: {},
-      hideLoading: () => {
-        this.setState({
-          isLoading: false,
-        })
-      }
     })
   };
 
   render() {
-    const { hot: { list } } = this.props;
-    const { isLoading } = this.state;
+    const { hot: { list }, loading } = this.props;
     return (
       <View className='about-page'>
         {
@@ -44,7 +33,7 @@ export default class Movie extends Component {
           ) : null
         }
         <AtToast
-          isOpened={isLoading}
+          isOpened={!!loading}
           status='loading'
           text='正在加载'
           hasMask
@@ -54,3 +43,5 @@ export default class Movie extends Component {
     )
   }
 }
+
+export default HotMovie

@@ -5,54 +5,35 @@ import { AtToast } from "taro-ui";
 import MovieItem from '../../components/movie';
 import './index.scss';
 
-@connect(({list}) => ({
+@connect(({list, loading}) => ({
   list,
+  loading: loading.models.list
 }))
-export default class List extends Component {
+class List extends Component {
   config = {
     navigationBarTitleText: '榜单',
   };
 
-  state = {
-    isLoading: false,
-  }
 
   componentDidMount = () => {
-    this.setState({
-      isLoading: true,
-    })
     const { dispatch } = this.props;
     dispatch({
       type: 'list/getList',
       payload: {},
-      hideLoading: () => {
-        this.setState({
-          isLoading: false,
-        })
-      }
     })
   };
   onReachBottom = () => {
-    this.setState({
-      isLoading: true,
-    })
     const { dispatch, list: { start } } = this.props;
     dispatch({
       type: 'list/getList',
       payload: {
         start,
       },
-      hideLoading: () => {
-        this.setState({
-          isLoading: false,
-        })
-      }
     })
   }
 
   render() {
-    const { list: { list } } = this.props;
-    const { isLoading } = this.state;
+    const { list: { list }, loading } = this.props;
     return (
       <View className='about-page'>
         {
@@ -63,7 +44,7 @@ export default class List extends Component {
           ) : null
         }
         <AtToast
-          isOpened={isLoading}
+          isOpened={!!loading}
           status='loading'
           text='正在加载'
           hasMask
@@ -73,3 +54,5 @@ export default class List extends Component {
     )
   }
 }
+
+export default List;

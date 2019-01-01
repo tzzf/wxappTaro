@@ -8,7 +8,7 @@ export default {
   },
 
   effects: {
-    * getList( { hideLoading, payload }, { call, put }) {
+    * getList( { payload }, { call, put }) {
         const res = yield call(getList, { ...payload });
         let { subjects, start, count } = res;
         start += count;
@@ -17,7 +17,6 @@ export default {
             payload: subjects,
             start,
         });
-        hideLoading();
     },
   },
 

@@ -7,14 +7,13 @@ export default {
   },
 
   effects: {
-    * getHot( { hideLoading, payload }, { call, put }) {
+    * getHot( { payload }, { call, put }) {
         const res = yield call(getHot, { ...payload });
         let { subjects } = res;
         yield put({
             type: 'save',
             payload: subjects,
         });
-        hideLoading();
     },
   },
 
