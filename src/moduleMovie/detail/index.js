@@ -41,14 +41,14 @@ class Detail extends Component {
     return (
       <View className='about-page'>
         {
-          !loading ? null : (
+          !loading ? (
             <View>
               <Image src={detail.images.medium} className='movie-pic' />
               <View>
                 {detail.summary}
               </View>
             </View>
-          )
+          ) : null
         }
         <AtToast
           isOpened={!!loading}
